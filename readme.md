@@ -44,7 +44,7 @@ If you save data with this "***_file" field it would automaticaly move the uploa
 
 By default no validation rules are attached to the file upload. **You have to explicity attach a rule to your field or your user could upload any kind of file !**
 
-### fileExtension(Array $authorizedExtensions, $alloEmpty = true)
+### fileExtension(Array $authorizedExtensions, $allowEmpty = true)
 
 Check that the file match an array of extensions (lowercase only)
 
