@@ -4,8 +4,8 @@ class Post extends AppModel{
 
 	public $actsAs = array('Upload.Upload' => array(
 		'fields' => array(
-			'thumb' => 'img/tmp/test1-%id',
-			'thumb2' => 'img/tmp/test2-%id'
+			'thumb' => 'img/tmp/test1-:id',
+			'thumb2' => 'img/tmp/test2-:id'
 		)
 	));
 	public $validate = array(
