@@ -1,5 +1,7 @@
 # CakePHP Plugin Upload
 
+[![Build Status](https://travis-ci.org/Grafikart/CakePHP-Upload.png?branch=master)](https://travis-ci.org/Grafikart/CakePHP-Upload)
+
 The main goal of this plugin is to give you the ability to manage file input easily (easy configuration). It was developed specifically for my needs so feel free to do some pull request if you want to add some features (without breaking the tests)
 
 ## Requirements
@@ -11,7 +13,7 @@ The main goal of this plugin is to give you the ability to manage file input eas
 
 Load the plugin using bootstrap.php
 
-    CakePlugin::load('Upload'); 
+    CakePlugin::load('Upload');
 
 ## Usage
 
@@ -36,7 +38,7 @@ The value is the path of the uploaded file (within the webroot directory)
 
 If you want to create an input to upload a new file you have to name this field ***_file. For the example above :
 
-	$this->Form->input('thumb_file', array('type' => 'file')); 
+	$this->Form->input('thumb_file', array('type' => 'file'));
 
 If you save data with this "***_file" field it would automaticaly move the uploaded file to the right directory keeping the extension (using lowercase) and saving the field in your table.
 
