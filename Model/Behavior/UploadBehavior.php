@@ -30,7 +30,14 @@ class UploadBehavior extends ModelBehavior{
     public function afterSave(Model $model, $created){
         $data = $model->data;
         foreach($this->options[$model->alias]['fields'] as $field => $path){
-           if(isset($data[$model->alias][$field . '_file'])){
+           if(
+                isset($data[$model->alias][$field . '_file']) &&
+                (
+                    !$model->whitelist ||
+                    empty($model->whitelist) ||
+                    in_array($field, $model->whitelist)
+                )
+            ){
                 $file = $data[$model->alias][$field . '_file'];
                 $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                 $path = $this->getUploadPath($model, $path, $extension);

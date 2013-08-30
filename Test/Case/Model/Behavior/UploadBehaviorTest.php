@@ -52,16 +52,26 @@ class UploadBehaviorTest extends CakeTestCase {
 		$this->assertEquals(false, $save);
 	}
 
-	public function testFileUpload() {
-		$file = array('name' => 'zoidberg.jpg','type' => 'image/jpg','tmp_name' => $this->image,'error' => (int) 0,'size' => (int) 52085);
+    public function testFileUpload() {
+        $file = array('name' => 'zoidberg.jpg','type' => 'image/jpg','tmp_name' => $this->image,'error' => (int) 0,'size' => (int) 52085);
         $this->Post->save(array(
             'id'    => 1,
             'thumb_file'   => $file
         ));
         $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
-		$this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
-		$this->Post->delete();
+        $this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
+        $this->Post->delete();
         $this->assertEquals(false, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
+    }
+
+	public function testFileUploadWithFieldNotAccepted() {
+		$file = array('name' => 'zoidberg.jpg','type' => 'image/jpg','tmp_name' => $this->image,'error' => (int) 0,'size' => (int) 52085);
+        $this->Post->save(array(
+            'id'    => 1,
+            'thumb_file'   => $file
+        ), true, array('id'));
+        $this->assertEquals(false, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
+		$this->assertEquals('', $this->Post->field('thumb'));
 	}
 
 	/**
