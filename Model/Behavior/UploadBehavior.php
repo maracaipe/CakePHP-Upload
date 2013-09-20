@@ -25,7 +25,7 @@ class UploadBehavior extends ModelBehavior{
     /**
     * CakePHP Model Functions
     **/
-    public function afterSave(Model $model, $created){
+    public function afterSave(Model $model, $created, $options = array()){
         $data = $model->data;
         foreach($this->options[$model->alias]['fields'] as $field => $path){
            if(
