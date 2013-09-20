@@ -22,8 +22,6 @@ class UploadBehavior extends ModelBehavior{
         $this->options[$model->alias] = array_merge($this->defaultOptions, $config);
     }
 
-
-
     /**
     * CakePHP Model Functions
     **/
@@ -32,6 +30,7 @@ class UploadBehavior extends ModelBehavior{
         foreach($this->options[$model->alias]['fields'] as $field => $path){
            if(
                 isset($data[$model->alias][$field . '_file']) &&
+                !empty($data[$model->alias][$field . '_file']['name']) &&
                 (
                     !$model->whitelist ||
                     empty($model->whitelist) ||
@@ -55,6 +54,7 @@ class UploadBehavior extends ModelBehavior{
            }
         }
     }
+
     public function beforeDelete(Model $model, $cascade = true){
         foreach($this->options[$model->alias]['fields'] as $field => $path){
             $model->deleteOldUpload($field);
@@ -102,6 +102,7 @@ class UploadBehavior extends ModelBehavior{
         $path = strtr($path, $replace) . '.' . $extension;
         return $path;
     }
+
     public function deleteOldUpload(Model $model, $field){
         $file = $model->field($field);
         if(empty($file)){

@@ -54,12 +54,23 @@ class UploadBehaviorTest extends CakeTestCase {
 
     public function testFileUpload() {
         $file = array('name' => 'zoidberg.jpg','type' => 'image/jpg','tmp_name' => $this->image,'error' => (int) 0,'size' => (int) 52085);
+        $file_empty = array('name' => '','type' => '','tmp_name' => '','error' => (int) 0,'size' => (int) 0);
         $this->Post->save(array(
             'id'    => 1,
             'thumb_file'   => $file
         ));
         $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
         $this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
+
+        // Does en empty file reset the file ?
+        $this->Post->save(array(
+            'id' => 1,
+            'thumb_file' => $file_empty
+        ));
+        $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
+        $this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
+
+        // test Auto deletion
         $this->Post->delete();
         $this->assertEquals(false, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
     }
