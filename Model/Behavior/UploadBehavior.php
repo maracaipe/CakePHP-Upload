@@ -50,7 +50,7 @@ class UploadBehavior extends ModelBehavior{
                     WWW_ROOT . $path
                 );
                 chmod(WWW_ROOT . $path, 0777);
-                $model->saveField($field, $path);
+                $model->saveField($field, '/' . $path);
            }
         }
     }
