@@ -31,8 +31,8 @@ class UploadBehaviorTest extends CakeTestCase {
 		if(!file_exists(IMAGES . 'tmp')){
 			mkdir(IMAGES . 'tmp');
 		}
-		$this->image = ROOT . DS . 'app' . DS . 'Plugin' . DS . 'Upload' . DS . 'Test' . DS . 'zoidberg.jpg';
-		$this->imagepng = ROOT . DS . 'app' . DS . 'Plugin' . DS . 'Upload' . DS . 'Test' . DS . 'zoidberg.png';
+		$this->image = ROOT . DS . APP_DIR . DS . 'Plugin' . DS . 'Upload' . DS . 'Test' . DS . 'zoidberg.jpg';
+		$this->imagepng = ROOT . DS . APP_DIR . DS . 'Plugin' . DS . 'Upload' . DS . 'Test' . DS . 'zoidberg.png';
         $this->Post = $this->getMockForModel('Upload.Post', array('move_uploaded_file'));
 		$this->Post->expects($this->any())->method('move_uploaded_file')->will($this->returnCallback('test_move_uploaded_file'));
 	}
@@ -60,7 +60,7 @@ class UploadBehaviorTest extends CakeTestCase {
             'thumb_file'   => $file
         ));
         $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
-        $this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
+        $this->assertEquals('/img/tmp/test1-1.jpg', $this->Post->field('thumb'));
 
         // Does en empty file reset the file ?
         $this->Post->save(array(
@@ -68,7 +68,7 @@ class UploadBehaviorTest extends CakeTestCase {
             'thumb_file' => $file_empty
         ));
         $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
-        $this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
+        $this->assertEquals('/img/tmp/test1-1.jpg', $this->Post->field('thumb'));
 
         // test Auto deletion
         $this->Post->delete();
@@ -111,8 +111,8 @@ class UploadBehaviorTest extends CakeTestCase {
         ));
         $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
         $this->assertEquals(true, file_exists(IMAGES . 'tmp' . DS . 'test2-1.png'));
-		$this->assertEquals('img/tmp/test1-1.jpg', $this->Post->field('thumb'));
-		$this->assertEquals('img/tmp/test2-1.png', $this->Post->field('thumb2'));
+		$this->assertEquals('/img/tmp/test1-1.jpg', $this->Post->field('thumb'));
+		$this->assertEquals('/img/tmp/test2-1.png', $this->Post->field('thumb2'));
 		$this->Post->delete();
         $this->assertEquals(false, file_exists(IMAGES . 'tmp' . DS . 'test1-1.jpg'));
         $this->assertEquals(false, file_exists(IMAGES . 'tmp' . DS . 'test2-1.png'));
