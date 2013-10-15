@@ -1,5 +1,5 @@
 {
-    "name": "Grafikart/CakePHP-Upload",
+    "name": "grafikart/cakephp-upload",
     "type": "cakephp-plugin",
     "description": "A simple plugin to handle file upload easily",
     "homepage": "https://github.com/Grafikart/CakePHP-Upload",
