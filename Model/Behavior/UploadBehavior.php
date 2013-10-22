@@ -95,9 +95,10 @@ class UploadBehavior extends ModelBehavior{
         $replace = array(
             ':id1000'  => ceil($model->id / 1000),
             ':id100'   => ceil($model->id / 100),
-            ':id'       => $model->id,
-            ':y'        => date('Y'),
-            ':m'        => date('m')
+            ':id'      => $model->id,
+            ':y'       => date('Y'),
+            ':m'       => date('m'),
+            ':uid'     => CakeSession::read('Auth.User.id')
         );
         $path = strtr($path, $replace) . '.' . $extension;
         return $path;

@@ -33,6 +33,7 @@ The value is the path of the uploaded file (within the webroot directory)
 * **:id**, record ID
 * **:id1000**, ceil( recordID / 1000) * to avoid a single direcoty with thousands of images
 * **:id100**
+* **:uid** User id (retrieved using CakeSession::read('Auth.User.id'))
 * **:y**, year (2013)
 * **:m**, month (03)
 
