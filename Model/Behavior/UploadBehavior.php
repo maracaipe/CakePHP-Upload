@@ -114,8 +114,10 @@ class UploadBehavior extends ModelBehavior{
         if(file_exists(WWW_ROOT . $file)){
             unlink(WWW_ROOT . $file);
         }
-        foreach($subfiles as $file){
-            unlink($file);
+        if($subfiles){
+            foreach($subfiles as $file){
+                unlink($file);
+            }
         }
     }
 
