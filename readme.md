@@ -4,7 +4,7 @@
 
 Para adicionar como submodule:
 
-	`git submodule add git@github.com:maracaipe/CakePHP-Upload.git app/Plugin/Upload`
+`git submodule add git@github.com:maracaipe/CakePHP-Upload.git app/Plugin/Upload`
 
 The main goal of this plugin is to give you the ability to manage file input easily (easy configuration). It was developed specifically for my needs so feel free to do some pull request if you want to add some features (without breaking the tests)
 
