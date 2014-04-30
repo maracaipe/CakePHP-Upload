@@ -12,6 +12,8 @@ class UploadBehavior extends ModelBehavior{
     * :id100  => ceil( Record ID / 100 )
     * :y      => year
     * :m      => month
+    * :uid    => user id (Auth.User.id)
+    * :md5    => random MD5
     **/
     private $defaultOptions = array(
         'fields' => array()
@@ -62,16 +64,12 @@ class UploadBehavior extends ModelBehavior{
         return true;
     }
 
-
-
     /**
      * Alias for the move_uploaded_file function, so it can be mocked for testing purpose
     */
     public function move_uploaded_file(Model $model, $source, $destination){
         move_uploaded_file($source, $destination);
     }
-
-
 
     /**
      * Custom Validation Rules
@@ -85,8 +83,6 @@ class UploadBehavior extends ModelBehavior{
         return in_array($extension, $extensions);
     }
 
-
-
     /**
     * MISC
     **/
@@ -98,7 +94,8 @@ class UploadBehavior extends ModelBehavior{
             ':id'      => $model->id,
             ':y'       => date('Y'),
             ':m'       => date('m'),
-            ':uid'     => CakeSession::read('Auth.User.id')
+            ':uid'     => CakeSession::read('Auth.User.id'),
+            ':md5'     => md5(rand() . uniqid() . time())
         );
         $path = strtr($path, $replace) . '.' . $extension;
         return $path;
